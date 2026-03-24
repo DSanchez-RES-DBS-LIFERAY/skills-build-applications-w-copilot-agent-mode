@@ -4,6 +4,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
+## Backend API (Codespaces)
+
+This app fetches data from the Django REST API using your Codespace URL.
+
+- Set `REACT_APP_CODESPACE_NAME` in `octofit-tracker/frontend/.env.local` (Codespace name only, not the full URL)
+- Restart the dev server after changing env vars: `npm start --prefix octofit-tracker/frontend`
+
 In the project directory, you can run:
 
 ### `npm start`
