@@ -28,8 +28,18 @@ SECRET_KEY = 'django-insecure-$k=_6zlynii1)zlg3d&2*pg3z9ir-^wz(+n1=i4&fur^7*(#1d
 DEBUG = True
 
 
-# Permitir todos los hosts
-ALLOWED_HOSTS = ['*']
+
+# Permitir localhost y el dominio de Codespaces
+import os
+codespace_name = os.environ.get('CODESPACE_NAME')
+if codespace_name:
+    ALLOWED_HOSTS = [
+        'localhost',
+        '127.0.0.1',
+        f'{codespace_name}-8000.app.github.dev',
+    ]
+else:
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -85,7 +95,7 @@ WSGI_APPLICATION = 'octofit_tracker.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 
-# Configuración para Djongo y MongoDB
+# Configuración para Djongo y MongoDB (sin autenticación)
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
@@ -93,10 +103,6 @@ DATABASES = {
         'ENFORCE_SCHEMA': False,
         'CLIENT': {
             'host': 'mongodb://localhost:27017',
-            'username': '',
-            'password': '',
-            'authSource': 'admin',
-            'authMechanism': 'SCRAM-SHA-1',
         },
     }
 }
